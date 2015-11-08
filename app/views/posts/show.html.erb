@@ -1,0 +1,38 @@
+
+<h1><%= @post.title %></h1>
+<p> <%= @post.body %> </p>
+<div class="">
+
+<%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary btn-sm" %>
+<%= link_to "Delete", post_path(@post), method: "delete",
+                                        class: "btn btn-danger btn-sm",
+                                        data: {confirm: "Are you sure you want to delete?" }%>
+</div>
+
+<!-- Display Comments -->
+<div class="">
+
+  <h4> <%= @post.comments.count %> Comments</h4>
+</div>
+
+<% @post.comments.order("created_at DESC").each do |comment| %>
+  <div class="well">
+    <p><%= comment.body %></p>
+    <!-- <p><%#= "created on #{comment.created_at.strftime("%d %b %H:%M")}" %> </p> -->
+    <%= link_to "Delete",  post_comment_path(comment), method: "delete",
+                                            class: "btn btn-danger btn-sm",
+                                            data: {confirm: "Are you sure you want to delete?" }%>
+
+  </div>
+<% end %>
+
+<!-- New Comment -->
+<%= form_for [@post, @comment] do |f| %>
+  <div class="form-group">
+    <%= f.label "Add a comment" %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit value: "Submit", class: "btn btn-primary" %>
+  </div>
+  <% end %>

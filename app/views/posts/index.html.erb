@@ -1,0 +1,22 @@
+
+<div class="col-md-8 col-lg-8">
+  <h1>All Blog Posts</h1>
+</div>
+
+<div class="col-md-4 col-lg-4">
+    <%= form_tag('/posts', method: 'get') do %>
+      <%= label_tag :search, "Search for:" %>
+      <%= text_field_tag(:search) %>
+      <%= submit_tag "Search"%>
+    <% end %>
+</div>
+
+  <div class="col-md-12 col-lg-12">
+
+  <% @posts.each do |post| %>
+    <div class="well">
+      <%=link_to post.title, post_path(post)%>
+    </div>
+      <% end  %>
+
+  </div>
