@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
 
+  belongs_to :user
   has_many :comments, dependent: :destroy
   # The above allows us to fetch all the comments belonging to a single post
   # post.comments

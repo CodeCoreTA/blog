@@ -17,11 +17,11 @@
 
 <% @post.comments.order("created_at DESC").each do |comment| %>
   <div class="well">
-    <p><%= comment.body %></p>
+  <%= comment.body %>
     <!-- <p><%#= "created on #{comment.created_at.strftime("%d %b %H:%M")}" %> </p> -->
-    <%= link_to "Delete",  post_comment_path(comment), method: "delete",
-                                            class: "btn btn-danger btn-sm",
-                                            data: {confirm: "Are you sure you want to delete?" }%>
+    <%= link_to "Delete",  post_comment_path(@post, comment), {method: :delete,
+                                            class: "btn btn-danger btn-sm pull-right",
+                                            data: {confirm: "Are you sure you want to delete?"}}%>
 
   </div>
 <% end %>

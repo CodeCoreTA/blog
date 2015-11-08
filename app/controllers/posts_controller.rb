@@ -16,6 +16,7 @@ class PostsController < ApplicationController
     new_post =  params.require(:post).permit([:title, :body])
 
     @post = Post.new(new_post)
+    @post.user = current_user
 
     if @post.save
     redirect_to post_path(@post), notice: "Post Created!"
@@ -49,7 +50,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @post = Post.find(params[:id])
 
     @post.destroy
