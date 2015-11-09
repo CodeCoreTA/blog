@@ -40,6 +40,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "quiet_assets"
+
   gem 'faker'
   gem 'hirb'
   gem 'awesome_print'

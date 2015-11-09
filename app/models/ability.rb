@@ -2,12 +2,22 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
+
     user ||= User.new
 
+    # Post Owner for Posts
     can :manage, Post do |post|
       user == post.user
-      # user == q.user || user.is_moderator?
+    end
+
+    # Comment Owner for comments
+    can :manage, Comment do |comment|
+      user == comment.user
+    end
+
+    # Post owner for Comments on their posts
+    can :destroy, Comment do |comment|
+      user == comment.post.user
     end
 
   end

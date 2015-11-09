@@ -2,6 +2,8 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user, only: [:new, :create, :edit, :destroy]
 
+  before_action :authorize, only: [:edit, :update, :destroy]
+
   def index
     # @posts = Post.all
     @posts = Post.search(params[:search]).order("updated_at DESC")
@@ -66,6 +68,10 @@ class PostsController < ApplicationController
   def search
     @posts = Post.search(params[:search])
     # render text: @posts.each {|post| puts post.title}
+  end
+
+  def authorize
+  redirect_to root_path, alert: "Access denied!" unless can? :manage, @q
   end
 
 end

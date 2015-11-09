@@ -22,16 +22,17 @@
 <div class="">
 
 <% @post.comments.order("created_at DESC").each do |comment| %>
+  <%= "#{comment.user.full_name}, #{comment.created_at.strftime("%d %b")}" %>
   <div class="well">
   <%= comment.body %>
-    <!-- <p><%#= "created on #{comment.created_at.strftime("%d %b %H:%M")}" %> </p> -->
+  <% if can? :destroy, comment %>
     <%= link_to "Delete",  post_comment_path(@post, comment), {method: :delete,
                                             class: "btn btn-danger btn-sm pull-right",
                                             data: {confirm: "Are you sure you want to delete?"}}%>
-
+  <% end %>
 </div>
-  </div>
 <% end %>
+  </div>
 
 <div class="container">
 <!-- New Comment -->

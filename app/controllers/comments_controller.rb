@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_action :authenticate_user, only: [:new, :create, :edit, :destroy]
+
   def create
     # grab comment input from params and only allow body
     comment_params = params.require(:comment).permit([:body])
@@ -10,6 +12,7 @@ class CommentsController < ApplicationController
     @post = Post.find params[:post_id]
 
     @comment.post = @post
+    @comment.user = current_user
 
     # if it passes validation
     if @comment.save
