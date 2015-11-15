@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify
+
+  has_many :favourites, dependent: :destroy
+  has_many :favourited_posts, through: :favourites, source: :post
+
   has_secure_password
 
   validates :email, presence: true, uniqueness: true

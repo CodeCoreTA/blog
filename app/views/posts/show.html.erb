@@ -14,6 +14,16 @@
 <% end %>
 </div>
 
+<!-- Favourites -->
+<div class="favourites">
+  <% if @post.favourited_by?(current_user) && user_signed_in? %>
+    <%= link_to fa_icon("star"), post_favourite_path(@post, @post.favourite_for(current_user)), method: :delete, class: "big-icon", alt: "Favourite" %>
+ <% else %>
+    <%= link_to fa_icon("star-o"), post_favourites_path(@post), method: :post, class: "big-icon", alt: "Favourite" %>
+ <% end %>
+ Favourited: <%= pluralize(@post.favourites.count, "time") %>
+</div>
+
 <!-- Display Comments -->
 <div class="">
 

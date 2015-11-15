@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "font-awesome-rails"
+
 gem 'cancancan', '~> 1.10'
 
 gem 'bootstrap-sass'
