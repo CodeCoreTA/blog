@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    new_post =  params.require(:post).permit([:title, :body])
+    new_post =  params.require(:post).permit([:title, :body, {tag_ids: []}])
 
     @post = Post.new(new_post)
     @post.user = current_user
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     # grab input from form
-    new_post =  params.require(:post).permit([:title, :body])
+    new_post =  params.require(:post).permit([:title, :body, {tag_ids: []}])
 
     if @post.update(new_post)
       redirect_to post_path(@post), notice: "Post updated!"
@@ -71,7 +71,8 @@ class PostsController < ApplicationController
   end
 
   def authorize
-  redirect_to root_path, alert: "Access denied!" unless can? :manage, @q
+  @post = Post.find(params[:id])
+  redirect_to root_path, alert: "Access denied!" unless can? :manage, @post
   end
 
 end

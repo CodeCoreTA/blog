@@ -2,11 +2,12 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   has_many :comments, dependent: :destroy
-  # The above allows us to fetch all the comments belonging to a single post
-  # post.comments
 
   has_many :favourites, dependent: :destroy
   has_many :favouriting_users, through: :favourites, source: :user
+
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
 
   #Validation
   validates(:title, presence: true,
