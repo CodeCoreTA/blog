@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
 
     # if it passes validation
     if @comment.save
+      CommentsMailer.notify_post_owner(@comment).deliver_now
       # redirect back to the post show page and pass the post
       redirect_to post_path(@post), notice: "Comment created!"
     else

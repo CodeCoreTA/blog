@@ -44,6 +44,7 @@ end
 group :development do
   gem "quiet_assets"
 
+  gem 'letter_opener'
   gem 'faker'
   gem 'hirb'
   gem 'awesome_print'
