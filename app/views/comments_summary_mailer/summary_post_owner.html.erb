@@ -1,0 +1,9 @@
+<p>Hello <%= @owner.first_name %></p>
+<p>Below is a summary of today's new comments on your Posts: </p>
+<% @updates.each do |update|  %>
+<p>Post: <b><%= update.post.title %></b></p>
+<p>Username: <%= update.user.first_name %></p>
+<p>Comment: <%= update.body %></p>
+<% end %>
+<p>Best Regards,</p>
+<p>My Blog</p>

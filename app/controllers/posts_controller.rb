@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   def index
     # @posts = Post.all
     @posts = Post.search(params[:search]).order("updated_at DESC")
+    DailyCommentSummaryJob.perform_later
 
   end
 
