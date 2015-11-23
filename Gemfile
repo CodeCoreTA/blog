@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'react-rails', '~> 1.4.0'
+
 gem "font-awesome-rails"
 
 gem 'cancancan', '~> 1.10'
@@ -41,6 +43,8 @@ end
 group :development do
   gem "quiet_assets"
 
+  gem 'rails-erd'
+  
   gem 'delayed_job_web'
 
   gem 'letter_opener'
