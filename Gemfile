@@ -3,14 +3,18 @@ source 'https://rubygems.org'
 gem 'react-rails', '~> 1.4.0'
 
 gem "font-awesome-rails"
-
-gem 'cancancan', '~> 1.10'
-
 gem 'bootstrap-sass'
 
 gem 'rails', '4.2.4'
 
+gem 'carrierwave'
+gem 'mini_magick'
+gem "fog"
+
 gem 'delayed_job_active_record'
+
+gem 'friendly_id'
+gem 'simple_form'
 
 gem 'pg'
 
@@ -29,6 +33,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'cancancan', '~> 1.10'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -41,10 +46,10 @@ group :development, :test do
 end
 
 group :development do
-  gem "quiet_assets"
+  gem 'quiet_assets'
 
   gem 'rails-erd'
-  
+
   gem 'delayed_job_web'
 
   gem 'letter_opener'

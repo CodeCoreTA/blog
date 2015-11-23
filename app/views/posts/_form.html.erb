@@ -1,17 +1,16 @@
-<%= @post.errors.full_messages.join(', ')  %>
 
-<%= form_for @post do |f| %>
+<%= simple_form_for @post do |f| %>
   <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: "form-control" %>
+    <%= f.input :title, input_html: {placeholder: "must be unique.."} %>
   </div>
   <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, rows: 15, class: "form-control" %>
+    <%= f.input :body, input_html: {class: "blog"} %>
   </div>
-  <div class="">
+  <div class="form-group">
     <%= f.collection_check_boxes :tag_ids, Tag.order(:name), :id, :name %>
   </div>
+  <div class="form-group">
+    <%= f.input :image %>
+  </div>
   <%= f.submit(class: "btn btn-primary") %>
-
 <%end%>

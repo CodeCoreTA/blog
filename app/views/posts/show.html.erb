@@ -1,6 +1,10 @@
 
 <h1><%= @post.title %></h1>
 <p> <%= @post.body %> </p>
+<% if @post.image.present? %>
+  <p> <%= image_tag @post.image.url(:medium) %> </p>
+<% end %>
+
 <% @post.tags.each do |tag| %>
   <div class="label label-primary"><%= tag.name %></div>
 <% end %>
