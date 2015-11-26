@@ -1,3 +1,35 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  // image-url is coming from rails
+  // http://guides.rubyonrails.org/asset_pipeline.html
+  background: image-url("ballymoney.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.main-content{
+  background: rgba(157, 159, 164, .5);
+  // background-color: #9D9FA4;
+}
+
+h1 {
+  color: #E21349;
+  font-family: fantasy;
+  font-weight: 600;
+  text-shadow: 2px 2px 6px #000000;
+}
+
+.well {
+  background-color: rgba(157, 159, 164, .9);
+
+}
+
+a {
+  color: #141415;
+  font-family: monospace;
+}

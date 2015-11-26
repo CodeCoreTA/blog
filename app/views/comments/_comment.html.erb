@@ -1,0 +1,10 @@
+  <%= "#{comment.user.full_name}, #{comment.created_at.strftime("%d %b")}" %>
+  <div class="well" id="<%= dom_id(comment) %>">
+    <%= comment.body %>
+    <% if can? :destroy, comment %>
+      <%= link_to "Delete",  post_comment_path(@post, comment), {method: :delete,
+                                              class: "btn btn-danger btn-sm pull-right",
+                                              data: {disable_with: "Deleting..."},
+                                              remote: true } %>
+    <% end %>
+  </div>
