@@ -2,7 +2,7 @@ class FavouritesController < ApplicationController
   before_action :authenticate_user
 
   def index
-    
+
   end
 
   def create
@@ -11,13 +11,15 @@ class FavouritesController < ApplicationController
 
     favourite.post = post
     favourite.user = current_user
-
-    if favourite.save
-      redirect_to post_path(post), notice: "post favorited!"
-    else
-      redirect_to post_path(post), alert: "favorited already!"
+    respond_to do |format|
+      if favourite.save
+        format.html {redirect_to post_path(post), notice: "post favourited!"}
+        format.js {render :fav_create_success}
+      else
+        format.html {redirect_to post_path(post), alert: "favourited already!"}
+        format.js {render :fav_create_failure}
+      end
     end
-
   end
 
   def destroy

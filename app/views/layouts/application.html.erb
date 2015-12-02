@@ -7,9 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
-    <!-- navbar -->
-    <%= render "/layouts/nav"  %> 
+  <!-- navbar -->
+  <%= render "/layouts/nav"  %>
+
+  <div class="container main">
 
     <% if flash[:notice] %>
           <div class="alert alert-warning alert-dismissible" role="alert">
@@ -17,7 +18,11 @@
             <%=flash[:notice] %>
           </div>
       <% elsif flash[:alert] %>
-        <div class="alert alert-danger"><%=flash[:alert] %></div>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%=flash[:alert] %>
+      </div>
+
       <% end  %>
 
     <%= yield %>

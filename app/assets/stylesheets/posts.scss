@@ -5,7 +5,7 @@
 body {
   // image-url is coming from rails
   // http://guides.rubyonrails.org/asset_pipeline.html
-  background: image-url("ballymoney.jpg") no-repeat center center fixed;
+  background: image-url("indian_arm.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -14,8 +14,11 @@ body {
 
 .main-content{
   background: rgba(157, 159, 164, .5);
+  border-radius: 10px;
   // background-color: #9D9FA4;
 }
+
+textarea.blog { height: 200px;}
 
 h1 {
   color: #E21349;
@@ -31,5 +34,27 @@ h1 {
 
 a {
   color: #141415;
-  font-family: monospace;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+a:hover {
+  color: #CCCCCC;
+}
+a:active {
+  color: #333333;
+}
+.post-thumb {
+  width: 200px;
+  height: 200px;
+  background-color: rgba(157, 159, 164, .5);
+}
+.big-icon {
+  font-size: 30px;
+  color: #A7232E;
+}
+
+p {
+  font-family: cursive;
+  font-size: 16px;
+  color: black;
 }

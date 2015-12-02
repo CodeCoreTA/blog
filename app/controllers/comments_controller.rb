@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        CommentsMailer.notify_post_owner(@comment).deliver_later
+        # CommentsMailer.notify_post_owner(@comment).deliver_later
         # redirect back to the post show page and pass the post
         format.html {redirect_to post_path(@post), notice: "Comment created!"}
         format.js {render :create_success}
