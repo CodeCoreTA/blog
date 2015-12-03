@@ -12,6 +12,5 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
-
-textarea.blog { height: 200px;}

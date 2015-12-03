@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/home' => 'home#home'
   get '/about' => 'home#about'
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
   resources :users, only: [:new, :create]
 
   resources :sessions, only: [:new, :create] do
@@ -13,7 +15,10 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments
+    resources :favourites, only: [:create, :destroy]
   end
+
+  resources :favourites , only: [:index]
 
   # OLD ROUTES FOR POSTS
   # post 'posts/search' => 'posts#search'

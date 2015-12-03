@@ -1,38 +1,48 @@
+<div class="container main-content">
 
-<h1><%= @post.title %></h1>
-<p> <%= @post.body %> </p>
-<div class="">
-
-<%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary btn-sm" %>
-<%= link_to "Delete", post_path(@post), method: "delete",
-                                        class: "btn btn-danger btn-sm",
-                                        data: {confirm: "Are you sure you want to delete?" }%>
-</div>
-
-<!-- Display Comments -->
-<div class="">
-
-  <h4> <%= @post.comments.count %> Comments</h4>
-</div>
-
-<% @post.comments.order("created_at DESC").each do |comment| %>
-  <div class="well">
-    <p><%= comment.body %></p>
-    <!-- <p><%#= "created on #{comment.created_at.strftime("%d %b %H:%M")}" %> </p> -->
-    <%= link_to "Delete",  post_comment_path(comment), method: "delete",
-                                            class: "btn btn-danger btn-sm",
-                                            data: {confirm: "Are you sure you want to delete?" }%>
-
-  </div>
-<% end %>
-
-<!-- New Comment -->
-<%= form_for [@post, @comment] do |f| %>
-  <div class="form-group">
-    <%= f.label "Add a comment" %>
-    <%= f.text_area :body, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.submit value: "Submit", class: "btn btn-primary" %>
-  </div>
+  <h1><%= @post.title %></h1>
+  <% if @post.image.present? %>
+    <p> <%= image_tag @post.image.url(:large) %> </p>
   <% end %>
+  <p> <%= @post.body %> </p>
+
+  <% @post.tags.each do |tag| %>
+    <div class="label label-primary"><%= tag.name %></div>
+  <% end %>
+
+  <p> created by: <%= @post.user.full_name %> </p>
+  <div class="">
+
+  <% if can? :edit, @post %>
+    <%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary btn-sm" %>
+  <% end %>
+  <% if can? :destroy, @post %>
+    <%= link_to "Delete", post_path(@post), method: "delete",
+                                          class: "btn btn-danger btn-sm",
+                                          data: {confirm: "Are you sure you want to delete?" }%>
+  <% end %>
+  </div>
+
+  <!-- Favourites -->
+  <div class="favourites">
+    <%= render "/favourites/favourite", post: @post %>
+  </div>
+
+  <!-- Display Comments -->
+  <div id="comments">
+    <div class="comments-count">
+      <h4> <%= @post.comments.count %> Comments</h4>
+    </div>
+    <div id="show-comments">
+      <% @post.comments.order("created_at DESC").each do |comment| %>
+        <%= render "/comments/comment", comment: comment %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="comment-form">
+    <!-- Create a New Comment Form-->
+    Create a Comment
+      <%= render "/comments/form" %>
+  </div>
+</div>
