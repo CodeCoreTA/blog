@@ -1,7 +1,0 @@
-<h3>Comment</h3>
-<p> <%= @comment.body %> </p>
-
-<%= link_to "Edit", edit_comment_path(@comment), class: "btn-sm btn-primary" %>
-<%= link_to "Delete", comment_path(@comment), {method: :delete,
-                                               class: "btn-sm btn-danger",
-                                               data: {confirm: "Are you sure?"}} %>

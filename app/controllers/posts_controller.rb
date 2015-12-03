@@ -2,9 +2,12 @@ class PostsController < ApplicationController
 
   before_action :authenticate_user, only: [:new, :create, :edit, :destroy]
 
+  before_action :authorize, only: [:edit, :update, :destroy]
+
   def index
     # @posts = Post.all
     @posts = Post.search(params[:search]).order("updated_at DESC")
+    DailyCommentSummaryJob.perform_later
 
   end
 
@@ -13,9 +16,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    new_post =  params.require(:post).permit([:title, :body])
+    new_post =  params.require(:post).permit([:title, :body, {tag_ids: []}, :image])
 
     @post = Post.new(new_post)
+    @post.user = current_user
 
     if @post.save
     redirect_to post_path(@post), notice: "Post Created!"
@@ -40,7 +44,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     # grab input from form
-    new_post =  params.require(:post).permit([:title, :body])
+    new_post =  params.require(:post).permit([:title, :body, {tag_ids: []}, :image])
 
     if @post.update(new_post)
       redirect_to post_path(@post), notice: "Post updated!"
@@ -49,7 +53,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @post = Post.find(params[:id])
 
     @post.destroy
@@ -65,6 +69,11 @@ class PostsController < ApplicationController
   def search
     @posts = Post.search(params[:search])
     # render text: @posts.each {|post| puts post.title}
+  end
+
+  def authorize
+  @post = Post.find(params[:id])
+  redirect_to root_path, alert: "Access denied!" unless can? :manage, @post
   end
 
 end

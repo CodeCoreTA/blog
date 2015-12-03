@@ -1,0 +1,8 @@
+<% if user_signed_in? && @post.favourited_by?(current_user) %>
+  <%= link_to fa_icon("heart"), post_favourite_path(@post, @post.favourite_for(current_user)),
+                                        method: :delete, class: "big-icon", alt: "Favourite" %>
+<% else %>
+  <%= link_to fa_icon("heart-o"), post_favourites_path(@post),
+                                        method: :post, class: "big-icon", alt: "Favourite" %>
+<% end %>
+Favourited: <%= pluralize(@post.favourites.count, "time") %>
